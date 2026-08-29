@@ -1,0 +1,19 @@
+name: basePlugin
+version: '${version}'
+
+main: com.yuuki795.basePlugin.BasePlugin
+api-version: '1.21.11'
+load: POSTWORLD
+depend: [LuckPerms]
+folia-supported: true
+
+commands:
+  insmp:
+    description: Manage whitelist / rank syncing against the auth API.
+    usage: /insmp <sync [player|all] | reload | status | lookup <player>>
+    permission: insmp.admin
+
+permissions:
+  insmp.admin:
+    description: Use /insmp.
+    default: op

@@ -1,0 +1,60 @@
+
+# API Details for query for rank info.
+api:
+  url: ""
+  token: ""
+  timeout-seconds: 10
+
+cache:
+  # How often to pull the full list in the background. 0 disables background refresh.
+  refresh-seconds: 300
+  # On join, refresh first if the cached list is older than this. Keeps a player who
+  # linked seconds ago from having to relog.
+  max-age-on-join-seconds: 60
+
+sync:
+  on-join: true
+
+  # Which field of the API record decides the group.
+  #
+  # NOTE: the sample record has no "role" field, so this defaults to nation_name -
+  # the only role-like field the API returns. If the API starts returning a dedicated
+  # "role" field, change this one line to: role-field: "role"
+  role-field: "nation_name"
+
+  # API value (case-insensitive) -> LuckPerms group name.
+  # The groups must already exist in LuckPerms (/lp creategroup <name>).
+  groups:
+    # tundra: "tundra"
+    # desert: "desert"
+
+  # Group for a player who IS in the API but whose role is not mapped above.
+  # Blank = leave them alone and log a warning.
+  fallback-group: ""
+
+  # Group for a player who is NOT in the API at all. Blank = do nothing.
+  unregistered-group: ""
+
+  # Remove the player from every other group listed above when applying one.
+  # Turn this off if a player can legitimately hold two mapped groups at once.
+  exclusive: true
+
+  # Also write the applied group as the player's LuckPerms *stored* primary group.
+  # LuckPerms only reads that value when its own primary-group-calculation is "stored";
+  # on the default (parents-by-weight) it picks the highest-weight group instead, so give
+  # your mapped groups weights with /lp group <name> setweight <n> if you rely on this.
+  set-primary-group: true
+
+  # Strip mapped groups from a player who has been removed from the API.
+  # Only has an effect when unregistered-group is blank.
+  remove-groups-when-unregistered: false
+
+  kick-if-not-registered: true
+  kick-message: "<red>You are not linked yet.</red><newline><gray>Link your account in Discord, then rejoin."
+
+  notify-player: false
+
+  notify-message: "<gray>Rank synced: <white><group></white>"
+
+
+debug: false
